@@ -21,6 +21,7 @@
     <link rel="canonical" href=".">
 
     <!-- Import other AMP Extensions here -->
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
     <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
     
     <style amp-custom>
@@ -40,11 +41,23 @@
     }
     body {
       padding: .4em;
-      font-size: .8em;
+      font-size: 1.1em;
       font-family: 'Raleway', sans-serif;
     }
     h1 {
       text-align: center;
+    }
+    .headerbar {
+      background-color: #ddd;
+      font-size: 1.1em;
+    }
+    .headerbar > div {
+      display: inline-block;
+      font-size: 1.1em;
+    }
+    .headerbar h1 {
+      display: inline-block;
+      font-size: 1.1em;
     }
     h2 {
       margin-bottom: .1em;
@@ -52,19 +65,26 @@
       font-family: 'Crimson Text', serif;
     }
     table {
-      border: 1px solid #999;
+      border: 1px solid #ccc;
       border-collapse: collapse;
-      margin: .9em auto;
-      width: 90%;
+      margin: 0;
+      width: 100%;
+    }
+    th {
+      background-color: #ddd;
+      padding: .4em;
     }
     td {
       padding: .4em;
     }
     section {
       text-align: center;
-      margin: 2em;
-      border: .2em solid #ccc;
+      margin: .4em;
+      border: .2em solid #eee;
       padding: 0;
+    }
+    section div {
+      margin: .5em .2em;
     }
     section h2 {
       background-color:aqua;
@@ -73,6 +93,19 @@
     }
     section ul li {
       text-align: left;
+    }
+    #sidebar1 ul {
+      margin: 0;
+      padding: 0;
+    }
+    #sidebar1 ul li {
+      text-align: left;
+      list-style: none;
+      margin: 0;
+      padding: .7em;
+    }
+    #sidebar1 ul li a {
+      color: inherit;
     }
     a {
       text-decoration: none;
@@ -86,37 +119,97 @@
       background-color: #277FF6;
       color: white;
     }
+    .pink1 {
+      background-color: #F027F6;
+      color: white;
+    }
     .orange1 {
       background-color: #F67327;
       color: white;
     }
+
+    .aqua {
+      background-color: #08BFC2;
+      color: white;
+    }
+
+    .red1 {
+      background-color: red;
+      color: white;
+    }
+
+    .hamburger {
+      padding-left: 10px;
+    }
+    .sidebar {
+      padding: 10px;
+      margin: 0;
+    }
+    .sidebar > li {
+      list-style: none;
+      margin-bottom:10px;
+    }
+    .sidebar a {
+      text-decoration: none;
+    }
+    .close-sidebar {
+      font-size: 1.5em;
+      padding-left: 5px;
+    }
+
     </style>
 
-    <title>Lunch &amp; Learn: AMP Project</title>
+    <title>Lunch &amp; Learn: AMP</title>
   </head>
   <body>
-    <h1>Lunch &amp; Learn: AMP Project</h1>
+    <header class="headerbar" role="button" on="tap:sidebar1.toggle" tabindex="0" >
+      <div class="hamburger">☰</div>
+      <div class="site-name"><h1>Lunch &amp; Learn: AMP</h1></div>
+    </header>
 
-    <section>
+    <amp-sidebar id="sidebar1" layout="nodisplay" side="right">
+      <ul>
+        <li class="orange1"><a href="#sec1" on="tap:sec1.scrollTo">Mind Map</a></li>
+        <li class="aqua"><a href="#sec11" on="tap:sec11.scrollTo">Mind Map</a></li>
+        <li class="green1"><a href="#sec2" on="tap:sec2.scrollTo">HTML vs. AMP</a></li>
+        <li class="blue1"><a href="#sec3" on="tap:sec3.scrollTo">YouTube</a></li>
+        <li class="orange1"><a href="#sec4" on="tap:sec4.scrollTo">Source Code On Github</a></li>
+        <li class="blue1"><a href="#sec5" on="tap:sec5.scrollTo">References</a></li>
+      </ul>
+    </amp-sidebar>
+
+    <section id="sec1">
       <h2 class="orange1">
         Mind Map
       </h2>
+      <!--
+        <img> tag replaced with amp-img.
+        Please note: <img> is a Void Element according to HTML5, so it does not have an 
+        end tag. However, <amp-img> does have an end tag </amp-img>.
+      -->
       <a href="https://coggle.it/diagram/XJPOtyJC20TYOab2/t/amp-project">
         <amp-img src="img/amp_mind_map.png" width="900" height="675" layout="responsive">
         </amp-img>
       </a>
     </section>
 
-    <section>
-      <h2 class="green1">
-        Traditional HTML vs. AMP HTML page
+    <section id="sec11">
+      <h2 class="aqua">
+        Tools
       </h2>
+      <ul>
+        <li><a href="https://validator.ampproject.org/#url=http%3A%2F%2Fwww.ucxp.com%2Famp">AMP Validator</a></li>
+      </ul>
+    </section>
+
+    <section id="sec2">
+      <h2 class="green1">Speed Test: HTML vs. AMP HTML</h2>
       <table border="1">
         <tr>
           <th></th>
-          <th>Traditional</th>
-          <th>AMP</th>
-          <th>Cached</th>
+          <th>HTML</th>
+          <th>AMP HTML</th>
+          <th>AMP Cached</th>
         </tr>
         <tr class="odd">
           <td>1</td>
@@ -158,26 +251,63 @@
       </table>
     </section>
 
-    <section>
+    <section id="sec3">
       <h2 class="blue1">
-        Youtube component
+        YouTube component demo
       </h2>
+      <!--
+        Replaced with amp-youtube.
+      -->
       <amp-youtube
         data-videoid="TX3sFXHwXjo"
         layout="responsive"
         width="480" height="270"></amp-youtube>
     </section>
     
-    <section>
+    <section id="sec4">
+      <h2 class="orange1">
+        Source Code on Github
+      </h2>
+      <ul>
+        <li><a href="https://github.com/testdrivenlearning/amphtml/">DEMO</a></li>
+        <li><a href="https://github.com/testdrivenlearning/amphtml/blob/master/index.html">Source Code: index.html</a></li>
+      </ul>
+    </section>
+    
+    <section id="sec5">
       <h2 class="blue1">
         References
       </h2>
       <ul>
+        <li><a href="https://amp.dev/documentation/guides-and-tutorials/start/create/index.html?format=websites">Create your first AMP page</a></li>
         <li><a href="https://amp.dev/documentation/guides-and-tutorials/learn/spec/amphtml.html?format=websites">AMP HTML Specification</a></li>
         <li><a href="https://developers.google.com/search/docs/guides/about-amp">Understand how AMP looks in search results</a></li>
         <li><a href="https://www.addthis.com/academy/benefits-of-accelerated-mobile-pages/">Benefits of Accelerated Mobile Pages (AMP)</a></li>
         <li><a href="https://www.youtube.com/watch?v=Gv8A4CktajQ">What's Allowed in AMP and What Isn't?</a></li>
       </ul>
     </section>
+
+    <section id="sec6">
+      <h2 class="pink1">
+        Dynamic Features
+      </h2>
+      <ul>
+        <li><a href="https://github.com/testdrivenlearning/amphtml/">DEMO</a></li>
+        <li><a href="https://github.com/testdrivenlearning/amphtml/blob/master/index.html">Source Code: index.html</a></li>
+      </ul>
+    </section>
+
+    <section id="sec7">
+      <h2 class="red1">
+        Lazy loading image
+      </h2>
+      <!--
+        <img> tag replaced with amp-img.
+        Please note: <img> is a Void Element according to HTML5, so it does not have an 
+        end tag. However, <amp-img> does have an end tag </amp-img>.
+      -->
+      <div><amp-img src="img/lazy.png" width="900" height="675" layout="responsive"></amp-img></div>
+    </section>
+
   </body>
 </html>
